@@ -9,14 +9,17 @@ use Illuminate\Http\Request;
 
 class PostsController extends Controller
 {
-    public __construct()
+    public function __construct()
     {
       $this->middleware('auth');
     }
 
     public function index()
     {
-      return view('post/index');
+      $posts = Post::limit(10)
+        ->orderBy('created_at', 'desc')
+        ->get();
+      return view('post/index', ['posts'=>$posts]);
     }
 
     public function new()
