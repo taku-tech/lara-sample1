@@ -42,4 +42,11 @@ class PostsController extends Controller
       $request->photo->storeAs('public/post_images', $post->id . '.jpg');
       return redirect('/');
     }
+
+    public function destroy($post_id)
+    {
+      $post = Post::find($post_id);
+      $post->delete();
+      return redirect('/');
+    }
 }
